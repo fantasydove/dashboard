@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v2
@@ -46,9 +46,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git checkout statik || git checkout --orphan statik
           git rm -r --cached .
-          [ -f statik.go ] && rm statik.go || echo "statik.go not found"
-   	  [ -f go.mod ] && rm go.mod || echo "go.mod not found"
-   	  [ -f go.sum ] && rm go.sum || echo "go.sum not found"
+	  rm -f statik.go go.mod go.sum
 	  cp -f ../dashboard/statik/statik.go statik.go
           go mod init github.com/fantasydove/dashboard
           go mod tidy
